@@ -13,6 +13,7 @@
     <update_contact>_hub_AT_figuiere.net_</update_contact>
     <url type="homepage">https://www.discodsp.com/obxd/</url>
     <releases>
+        <release date="2022-03-27" version="2.8" />
         <release date="2022-03-07" version="2.7" />
         <release date="2022-01-09" version="2.6" />
     </releases>
