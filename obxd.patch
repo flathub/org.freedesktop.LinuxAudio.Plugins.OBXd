@@ -6,11 +6,12 @@ index 8c8e6d0..cfb3b6d 100644
                pluginAUExportPrefix="" pluginRTASCategory="2048" aaxIdentifier="com.discodsp.obxd"
                companyName="discoDSP" companyWebsite="https://www.discodsp.com/"
                pluginIsMidiEffectPlugin="0" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
--              pluginFormats="buildAU,buildStandalone,buildVST,buildVST3" buildVST="1"
-+              pluginFormats="buildAU,buildStandalone,buildVST3" buildVST="0"
-               buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0" buildAAX="0"
-               buildStandalone="1" enableIAA="0" jucerFormatVersion="1" pluginChannelConfigs="{0,2}"
-               companyCopyright="discoDSP" companyEmail="contactus@discodsp.com"
+-              pluginFormats="buildAU,buildLV2,buildStandalone,buildVST,buildVST3"
+-              buildVST="1" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
++              pluginFormats="buildAU,buildLV2,buildStandalone,buildVST3"
++              buildVST="0" buildVST3="1" buildAU="1" buildAUv3="0" buildRTAS="0"
+               buildAAX="0" buildStandalone="1" enableIAA="0" jucerFormatVersion="1"
+               pluginChannelConfigs="{0,2}" companyCopyright="discoDSP" companyEmail="contactus@discodsp.com"
 @@ -116,27 +116,27 @@
          <MODULEPATH id="juce_audio_utils" path="Modules"/>
        </MODULEPATHS>
@@ -75,7 +76,7 @@ index 50115bf..8e2d771 100644
  File ObxdAudioProcessor::getDocumentFolder() const
  {
 -	File folder = File::getSpecialLocation(File::userDocumentsDirectory).getChildFile("discoDSP").getChildFile("OB-Xd");
-+    File folder = File("/app/extensions/Plugins/OBXd/vst3/OB-Xd.vst3/Contents").getChildFile("OB-Xd");
++    File folder = File("/app/extensions/Plugins/OBXd/share").getChildFile("OB-Xd");
  /*
      if (! folder.exists())
      {
