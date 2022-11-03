@@ -14,9 +14,9 @@
             "name": "obxd",
             "buildsystem": "simple",
             "build-commands": [
-                "make -C JUCE/extras/Projucer/Builds/LinuxMakefile",
+                "make -C JUCE/extras/Projucer/Builds/LinuxMakefile -j $FLATPAK_BUILDER_N_JOBS",
                 "JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave OB-Xd.jucer",
-                "(cd Builds/LinuxMakefile && make CONFIG=Release64 VST3 LV2)"
+                "(cd Builds/LinuxMakefile && make -j $FLATPAK_BUILDER_N_JOBS CONFIG=Release64 VST3 LV2)"
             ],
             "post-install": [
                 "install -d ${FLATPAK_DEST}/vst3",
@@ -35,12 +35,12 @@
                 {
                     "type": "git",
                     "url": "https://github.com/reales/OB-Xd.git",
-                    "tag": "v2.9"
+                    "tag": "v2.10"
                 },
                 {
                     "type": "git",
                     "url": "https://github.com/juce-framework/JUCE.git",
-                    "tag": "7.0.1",
+                    "tag": "7.0.2",
                     "dest": "JUCE"
                 },
                 {
