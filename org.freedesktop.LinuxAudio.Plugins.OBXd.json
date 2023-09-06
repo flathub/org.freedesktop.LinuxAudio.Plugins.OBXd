@@ -13,9 +13,16 @@
         {
             "name": "obxd",
             "buildsystem": "simple",
+            "build-options": {
+                "env": {
+                    "AR": "/usr/bin/gcc-ar",
+                    "NM": "/usr/bin/gcc-nm",
+                    "RANLIB": "/usr/bin/gcc-ranlib"
+                }
+            },
             "build-commands": [
                 "make -C JUCE/extras/Projucer/Builds/LinuxMakefile -j $FLATPAK_BUILDER_N_JOBS",
-                "JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave OB-Xd.jucer",
+                "JUCE/extras/Projucer/Builds/LinuxMakefile/build/Projucer --resave OB-Xd\\\ Linux.jucer",
                 "(cd Builds/LinuxMakefile && make -j $FLATPAK_BUILDER_N_JOBS CONFIG=Release64 VST3 LV2)"
             ],
             "post-install": [
@@ -26,21 +33,22 @@
                 "cp -r Builds/LinuxMakefile/build/OB-Xd.lv2 ${FLATPAK_DEST}/lv2",
                 "strip ${FLATPAK_DEST}/lv2/OB-Xd.lv2/*.so",
                 "install -d ${FLATPAK_DEST}/share",
-                "cp -r Documents/discoDSP/OB-Xd ${FLATPAK_DEST}/share/",
-                "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.OBXd.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.OBXd --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.OBXd",
-                "install -Dm644 -t ${FLATPAK_DEST}/share/licenses/obxd license.txt"
+                "# cp -r Documents/discoDSP/OB-Xd ${FLATPAK_DEST}/share/",
+                "install -Dm644 org.freedesktop.LinuxAudio.Plugins.OBXd.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo",
+                "appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}",
+                "install -Dm644 LICENSE -t ${FLATPAK_DEST}/share/licenses/obxd"
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://github.com/reales/OB-Xd.git",
-                    "tag": "v2.10"
+                    "//": "upstream reset the repository and removed the tags.",
+                    "commit": "f1fcdd51eabcb7855cdd90818611cd7e357c359c"
                 },
                 {
                     "type": "git",
                     "url": "https://github.com/juce-framework/JUCE.git",
-                    "tag": "7.0.2",
+                    "tag": "7.0.3",
                     "dest": "JUCE"
                 },
                 {
@@ -51,7 +59,10 @@
                 },
                 {
                     "type": "patch",
-                    "path": "obxd.patch"
+                    "paths": [
+                        "patches/obxd-projucer.patch",
+                        "patches/obxd.patch"
+                    ]
                 },
                 {
                     "type": "file",
