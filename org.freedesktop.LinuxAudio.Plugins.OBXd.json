@@ -1,11 +1,10 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.OBXd",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
-    "sdk": "org.freedesktop.Sdk//23.08",
+    "sdk": "org.freedesktop.Sdk//24.08",
     "runtime-version": "stable",
     "build-extension": true,
-    "appstream-compose": false,
-    "branch": "23.08",
+    "branch": "24.08",
     "build-options": {
         "prefix": "/app/extensions/Plugins/OBXd"
     },
@@ -35,7 +34,6 @@
                 "install -d ${FLATPAK_DEST}/share",
                 "# cp -r Documents/discoDSP/OB-Xd ${FLATPAK_DEST}/share/",
                 "install -Dm644 org.freedesktop.LinuxAudio.Plugins.OBXd.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo",
-                "appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}",
                 "install -Dm644 LICENSE -t ${FLATPAK_DEST}/share/licenses/obxd"
             ],
             "sources": [
